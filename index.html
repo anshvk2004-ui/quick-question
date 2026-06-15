@@ -19,51 +19,60 @@
             color: #d81b60;
         }
 
+        /* MADE EVERYTHING BIGGER */
         .step-container { 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
             width: 90%;
-            max-width: 400px;
-            padding: 25px;
+            max-width: 480px; /* Increased frame size */
+            padding: 35px; /* Added more breathing room inside the box */
             background: rgba(255, 255, 255, 0.85);
-            border-radius: 20px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
         }
 
         .hidden { display: none !important; }
 
+        /* INCREASED IMAGE SIZE */
         img { 
-            width: 250px; 
-            height: 250px;
+            width: 300px; 
+            height: 300px;
             object-fit: cover;
-            border-radius: 15px; 
-            margin-bottom: 20px; 
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 20px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
+        /* INCREASED FONT SIZES */
         h1 { 
             color: #d81b60; 
-            font-size: 20px; 
+            font-size: 24px; 
             margin-bottom: 20px; 
             padding: 0 10px; 
             line-height: 1.4;
+        }
+        
+        p {
+            font-size: 20px;
+            font-weight: bold;
         }
 
         /* Standard choice buttons */
         .grid-choices {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
+            gap: 20px;
             width: 100%;
         }
 
+        /* BIGGER BUTTONS */
         .btn { 
-            font-size: 16px; 
-            padding: 12px 20px; 
+            font-size: 18px; 
+            padding: 15px 20px; 
             border: none; 
-            border-radius: 20px; 
+            border-radius: 25px; 
             cursor: pointer; 
             font-weight: bold; 
             background-color: #ff99c2; 
@@ -78,42 +87,36 @@
 
         /* Step 1 proceed button */
         #step1 .btn {
-            font-size: 18px;
-            padding: 15px 35px;
+            font-size: 20px;
+            padding: 18px 40px;
             width: auto;
         }
 
-        /* Dodge Area (Steps 6 & 7) */
+        /* FIXED DODGE AREA LOGIC (No overlapping) */
         .dodge-area {
             position: relative;
             width: 100%;
-            height: 100px; /* Space for buttons to exist in */
-            margin-top: 20px;
+            height: 120px; /* Lots of space for the button to run around */
+            margin-top: 10px;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            align-items: center; /* Centers them perfectly */
+            gap: 30px; /* Keeps Yes and No cleanly separated */
         }
 
-        .dodge-btn {
-            position: absolute; /* Needed for dodging logic */
-            width: 100px;
-            z-index: 10;
-        }
-
+        /* Initial positions are relative so they sit side-by-side */
         #yesBtn6, #yesBtn7 {
-            position: relative; /* Default placement */
+            position: relative; 
             z-index: 10;
-            width: 100px;
+            width: 120px;
         }
 
-        /* Initial positioning for 'No' button */
         #noBtn6, #noBtn7 { 
-            position: absolute; 
-            right: 25%;
+            position: relative; /* Will turn to absolute ONLY when touched */
             background-color: #cccccc; 
             color: white;
             z-index: 10;
-            width: 80px;
+            width: 100px;
         }
 
     </style>
@@ -121,7 +124,7 @@
 <body>
 
     <div id="step1" class="step-container">
-        <img src="https://media.giphy.com/media/Vp3ftHKvKpASA/giphy.gif" alt="Greeting Cat">
+        <img src="catwithrose.png" alt="Rose Cat">
         <h1>Hey Angshu.... hope you had a good day ✨</h1>
         <h1>If not, let's bring a smile on your face...</h1>
         <h1>I got a few questions for you 🐾</h1>
@@ -129,7 +132,7 @@
     </div>
 
     <div id="step2" class="step-container hidden">
-        <img src="https://media.giphy.com/media/xT0BKvK89eC79F2HhC/giphy.gif" alt="Scenery Cat">
+        <img src="mountcat.jpeg" alt="Mountain Cat">
         <h1>What's the better place?</h1>
         <div class="grid-choices">
             <button class="btn" onclick="nextStep(3)">Home (Assam) 🏡</button>
@@ -158,7 +161,7 @@
     </div>
 
     <div id="step5" class="step-container hidden">
-        <img src="https://media.giphy.com/media/C9x8gX02SnMIo/giphy.gif" alt="Action Cat">
+        <img src="cat_withgun.png" alt="Action Cat">
         <h1>What's your movie type right now? 🎬</h1>
         <div class="grid-choices">
             <button class="btn" onclick="nextStep(6)">Rom Com 💖</button>
@@ -168,26 +171,26 @@
     </div>
 
     <div id="step6" class="step-container hidden">
-        <img src="cat_withgun.png" alt="Gun Cat cat_withgun.png">
+        <img src="crycat.jpeg" alt="Crying Cat">
         <h1>Am I one of your favorite people to text right now? 😻</h1>
         <h1>(plzz be yes 😿)</h1>
         <div class="dodge-area" id="dodgeArea6">
             <button class="btn" id="yesBtn6" onclick="nextStep(7)">Yes 💖</button>
-            <button class="btn dodge-btn" id="noBtn6" onmouseover="dodgeBtn('noBtn6')" ontouchstart="dodgeBtn('noBtn6')" onclick="dodgeBtn('noBtn6')">No 😿</button>
+            <button class="btn" id="noBtn6" onmouseover="dodgeBtn('noBtn6')" ontouchstart="dodgeBtn('noBtn6')" onclick="dodgeBtn('noBtn6')">No 😿</button>
         </div>
     </div>
 
     <div id="step7" class="step-container hidden">
-        <img src="cute_eye.png" alt="Cute Eye cute_eye.png">
+        <img src="cute_eye.png" alt="Cute Eye">
         <h1>Let’s get serious... Are we getting momos soon? 🥟</h1>
         <div class="dodge-area" id="dodgeArea7">
             <button class="btn" id="yesBtn7" onclick="nextStep(8)">Yes 💖</button>
-            <button class="btn dodge-btn" id="noBtn7" onmouseover="dodgeBtn('noBtn7')" ontouchstart="dodgeBtn('noBtn7')" onclick="dodgeBtn('noBtn7')">No 😿</button>
+            <button class="btn" id="noBtn7" onmouseover="dodgeBtn('noBtn7')" ontouchstart="dodgeBtn('noBtn7')" onclick="dodgeBtn('noBtn7')">No 😿</button>
         </div>
     </div>
 
     <div id="step8" class="step-container hidden">
-        <img src="catwithrose.png" alt="Rose Cat catwithrose.png">
+        <img src="heartcat.jpeg" alt="Heart Cat">
         <h1>Yesss! I knew it! 😏 Get your raincoat ready. 🛵💨</h1>
         <p>Take a screenshot and send it to me! 📸</p>
     </div>
@@ -195,11 +198,8 @@
     <script>
         // Move between the different screens
         function nextStep(step) {
-            // Hide all containers
             const containers = document.querySelectorAll('.step-container');
             containers.forEach(container => container.classList.add('hidden'));
-            
-            // Show requested step
             document.getElementById('step' + step).classList.remove('hidden');
         }
 
@@ -212,25 +212,19 @@
             const noBtn = document.getElementById(btnId);
             const dodgeArea = noBtn.parentElement;
             
-            // Current coordinates and dimensions of the container area
-            const areaRect = dodgeArea.getBoundingClientRect();
-            const btnRect = noBtn.getBoundingClientRect();
+            // Switch to absolute positioning ONLY after the first hover/tap
+            // This prevents the overlapping issue on page load
+            noBtn.style.position = 'absolute';
 
-            // Calculate max available movement area inside the parent div
-            // Subtracting button size and a padding for safety
             const maxWidth = dodgeArea.clientWidth - noBtn.offsetWidth - 20;
             const maxHeight = dodgeArea.clientHeight - noBtn.offsetHeight - 20;
 
-            // Simple random positioning inside the area bounds
-            // Adding Math.max(10, ...) keeps it from sticking to the edge
             const randomX = Math.max(10, Math.floor(Math.random() * maxWidth));
             const randomY = Math.max(10, Math.floor(Math.random() * maxHeight));
 
-            // Force absolute positioning relative to parent dodge-area
-            noBtn.style.position = 'absolute';
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
-            noBtn.style.transform = 'none'; // Clear any default centering transform
+            noBtn.style.margin = '0'; // Clear any flexbox margins
 
             // Safety mechanism for mobile (after 8 taps/hovers, it disappears)
             if(btnId === 'noBtn6') {
