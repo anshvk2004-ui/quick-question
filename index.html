@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Questionnaire for Angshu 🐾</title>
+    <title>A Questionnaire 🐾</title>
     <style>
         body { 
             font-family: 'Arial', sans-serif; 
@@ -16,9 +16,9 @@
             align-items: center; 
             justify-content: center; 
             overflow: hidden; 
+            color: #d81b60;
         }
 
-        /* Standard styling for all steps */
         .step-container { 
             display: flex; 
             flex-direction: column; 
@@ -26,8 +26,8 @@
             justify-content: center;
             width: 90%;
             max-width: 400px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.7);
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 20px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
@@ -36,109 +36,84 @@
 
         img { 
             width: 250px; 
-            height: auto;
+            height: 250px;
+            object-fit: cover;
             border-radius: 15px; 
             margin-bottom: 20px; 
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         h1 { 
-            color: #ff66a3; 
+            color: #d81b60; 
             font-size: 20px; 
             margin-bottom: 20px; 
             padding: 0 10px; 
             line-height: 1.4;
         }
 
-        p { color: #ff66a3; font-weight: bold; margin-bottom: 20px;}
-
-        /* Multi-choice Buttons */
+        /* Standard choice buttons */
         .grid-choices {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 15px;
             width: 100%;
         }
 
-        /* Special single button styling for introductory screens */
-        .btn-proceed {
-            font-size: 18px; 
-            padding: 12px 30px; 
-            margin-top: 10px;
-            border: none; 
-            border-radius: 25px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            background-color: #ff99c2; 
-            color: white; 
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: all 0.2s;
-        }
-
-        /* standard questionnaire buttons */
         .btn { 
             font-size: 16px; 
-            padding: 10px 20px; 
+            padding: 12px 20px; 
             border: none; 
             border-radius: 20px; 
             cursor: pointer; 
             font-weight: bold; 
             background-color: #ff99c2; 
             color: white; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.2s;
             width: 100%;
         }
 
         .btn:active { transform: scale(0.95); }
-        .btn:hover { background-color: #ff66a3; }
-        .btn-proceed:hover { background-color: #ff66a3; }
+        .btn:hover { background-color: #d81b60; }
 
-        /* Step 6 (favorite to text) specific "please please" background GIF overlay */
-        #step6 {
-            position: relative;
-            background-color: rgba(255,255,255,0.7);
-        }
-        /* GIF Overlay for Step 6 */
-        #step6::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: 20px;
-            /* Stable Giphy GIF for "please please" background */
-            background-image: url('https://media.giphy.com/media/AAsbLwL3WGA3T0v7YV/giphy.gif'); 
-            background-size: cover;
-            background-position: center;
-            opacity: 0.25; /* Makes it subtle so text/image is readable */
-            z-index: -1;
+        /* Step 1 proceed button */
+        #step1 .btn {
+            font-size: 18px;
+            padding: 15px 35px;
+            width: auto;
         }
 
-        /* Dodging button layout logic (Steps 6 & 7) */
+        /* Dodge Area (Steps 6 & 7) */
         .dodge-area {
             position: relative;
             width: 100%;
-            height: 80px; /* Space for buttons to exist in */
-            margin-top: 10px;
+            height: 100px; /* Space for buttons to exist in */
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
-        #yesBtn6, #yesBtn7 {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 10px;
+        .dodge-btn {
+            position: absolute; /* Needed for dodging logic */
             width: 100px;
             z-index: 10;
         }
 
+        #yesBtn6, #yesBtn7 {
+            position: relative; /* Default placement */
+            z-index: 10;
+            width: 100px;
+        }
+
+        /* Initial positioning for 'No' button */
         #noBtn6, #noBtn7 { 
             position: absolute; 
+            right: 25%;
             background-color: #cccccc; 
             color: white;
-            bottom: 10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
             z-index: 10;
+            width: 80px;
         }
 
     </style>
@@ -150,12 +125,12 @@
         <h1>Hey Angshu.... hope you had a good day ✨</h1>
         <h1>If not, let's bring a smile on your face...</h1>
         <h1>I got a few questions for you 🐾</h1>
-        <button class="btn-proceed" onclick="nextStep(2)">Proceed ✨</button>
+        <button class="btn" onclick="nextStep(2)">Proceed ✨</button>
     </div>
 
     <div id="step2" class="step-container hidden">
-        <img src="https://media.giphy.com/media/xT0BKvK89eC79F2HhC/giphy.gif" alt="Mountains vs Home">
-        <h1>Angshu, what's the better place?</h1>
+        <img src="https://media.giphy.com/media/xT0BKvK89eC79F2HhC/giphy.gif" alt="Scenery Cat">
+        <h1>What's the better place?</h1>
         <div class="grid-choices">
             <button class="btn" onclick="nextStep(3)">Home (Assam) 🏡</button>
             <button class="btn" onclick="nextStep(3)">Himachal 🏔️</button>
@@ -163,19 +138,19 @@
     </div>
 
     <div id="step3" class="step-container hidden">
-        <img src="images.jpeg" alt="Flower Question">
-        <h1>If you had to choose, Angshu, which flower is your favorite? 🌸</h1>
+        <img src="images.jpeg" alt="Flowers images.jpeg">
+        <h1>Which flower is your favorite? 🌸</h1>
         <div class="grid-choices">
             <button class="btn" onclick="nextStep(4)">Lilies 🤍</button>
             <button class="btn" onclick="nextStep(4)">Sunflower 🌻</button>
             <button class="btn" onclick="nextStep(4)">Roses 🌹</button>
-            <button class="btn" onclick="nextStep(4)">Other/Surprise Me ✨</button>
+            <button class="btn" onclick="nextStep(4)">Surprise Me ✨</button>
         </div>
     </div>
 
     <div id="step4" class="step-container hidden">
-        <img src="https://media.giphy.com/media/26xBLu1Yn24t28R4k/giphy.gif" alt="Nonchalant or Funny Cat">
-        <h1>Which vibe do you prefer, Angshu?</h1>
+        <img src="nonchalant.jpeg" alt="Vibe nonchalant.jpeg">
+        <h1>Which vibe do you prefer?</h1>
         <div class="grid-choices">
             <button class="btn" onclick="nextStep(5)">Non-chalant 🕶️</button>
             <button class="btn" onclick="nextStep(5)">Funny 😂</button>
@@ -183,7 +158,7 @@
     </div>
 
     <div id="step5" class="step-container hidden">
-        <img src="cat-meme-cat-with-gun.png" alt="Cat with Gun Movie Type">
+        <img src="https://media.giphy.com/media/C9x8gX02SnMIo/giphy.gif" alt="Action Cat">
         <h1>What's your movie type right now? 🎬</h1>
         <div class="grid-choices">
             <button class="btn" onclick="nextStep(6)">Rom Com 💖</button>
@@ -193,70 +168,77 @@
     </div>
 
     <div id="step6" class="step-container hidden">
-        <img src="image_ba67ab.jpg" alt="Please Cat image_ba67ab.jpg">
+        <img src="cat_withgun.png" alt="Gun Cat cat_withgun.png">
         <h1>Am I one of your favorite people to text right now? 😻</h1>
         <h1>(plzz be yes 😿)</h1>
-        <div class="dodge-area">
+        <div class="dodge-area" id="dodgeArea6">
             <button class="btn" id="yesBtn6" onclick="nextStep(7)">Yes 💖</button>
-            <button class="btn" id="noBtn6" onmouseover="moveBtn('noBtn6')" ontouchstart="moveBtn('noBtn6')" onclick="moveBtn('noBtn6')">No 😿</button>
+            <button class="btn dodge-btn" id="noBtn6" onmouseover="dodgeBtn('noBtn6')" ontouchstart="dodgeBtn('noBtn6')" onclick="dodgeBtn('noBtn6')">No 😿</button>
         </div>
     </div>
 
     <div id="step7" class="step-container hidden">
-        <img src="image_ba6024.png" alt="Cute Crying Cat Eye image_ba6024.png">
-        <h1>Angshu, will you eat momos with me soon? 🥟</h1>
-        <div class="dodge-area">
+        <img src="cute_eye.png" alt="Cute Eye cute_eye.png">
+        <h1>Let’s get serious... Are we getting momos soon? 🥟</h1>
+        <div class="dodge-area" id="dodgeArea7">
             <button class="btn" id="yesBtn7" onclick="nextStep(8)">Yes 💖</button>
-            <button class="btn" id="noBtn7" onmouseover="moveBtn('noBtn7')" ontouchstart="moveBtn('noBtn7')" onclick="moveBtn('noBtn7')">No 😿</button>
+            <button class="btn dodge-btn" id="noBtn7" onmouseover="dodgeBtn('noBtn7')" ontouchstart="dodgeBtn('noBtn7')" onclick="dodgeBtn('noBtn7')">No 😿</button>
         </div>
     </div>
 
     <div id="step8" class="step-container hidden">
-        <img src="image_af7ee1.png" alt="Cat with Rose image_af7ee1.png">
-        <h1>Yesss! I knew it! 😏 Get your raincoat ready, Angshu. 🛵💨</h1>
+        <img src="catwithrose.png" alt="Rose Cat catwithrose.png">
+        <h1>Yesss! I knew it! 😏 Get your raincoat ready. 🛵💨</h1>
         <p>Take a screenshot and send it to me! 📸</p>
     </div>
 
     <script>
         // Move between the different screens
         function nextStep(step) {
-            document.getElementById('step1').classList.add('hidden');
-            document.getElementById('step2').classList.add('hidden');
-            document.getElementById('step3').classList.add('hidden');
-            document.getElementById('step4').classList.add('hidden');
-            document.getElementById('step5').classList.add('hidden');
-            document.getElementById('step6').classList.add('hidden');
-            document.getElementById('step7').classList.add('hidden');
-            document.getElementById('step8').classList.add('hidden');
+            // Hide all containers
+            const containers = document.querySelectorAll('.step-container');
+            containers.forEach(container => container.classList.add('hidden'));
+            
+            // Show requested step
             document.getElementById('step' + step).classList.remove('hidden');
         }
 
-        // Variable to track move attempts for dodging button (safety mechanism for mobile)
-        let moveCount = 0;
+        // Track dodge attempts (mobile safety mechanism)
+        let dodgeCount6 = 0;
+        let dodgeCount7 = 0;
 
-        // Logic to make the 'No' button run away
-        function moveBtn(btnId) {
+        // Logic to make the 'No' button run away strictly inside screen bounds
+        function dodgeBtn(btnId) {
             const noBtn = document.getElementById(btnId);
-            const parent = noBtn.parentElement; // The dodge-area <div>
+            const dodgeArea = noBtn.parentElement;
             
-            // Get dimensions of the area the button can move inside
-            const maxX = parent.clientWidth - noBtn.offsetWidth;
-            const maxY = parent.clientHeight - noBtn.offsetHeight;
+            // Current coordinates and dimensions of the container area
+            const areaRect = dodgeArea.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
 
-            // Generate new random position restricted to the dodge-area
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
+            // Calculate max available movement area inside the parent div
+            // Subtracting button size and a padding for safety
+            const maxWidth = dodgeArea.clientWidth - noBtn.offsetWidth - 20;
+            const maxHeight = dodgeArea.clientHeight - noBtn.offsetHeight - 20;
 
-            // Change positioning mode from absolute-centered to absolute-manual
-            noBtn.style.transform = 'none';
+            // Simple random positioning inside the area bounds
+            // Adding Math.max(10, ...) keeps it from sticking to the edge
+            const randomX = Math.max(10, Math.floor(Math.random() * maxWidth));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxHeight));
+
+            // Force absolute positioning relative to parent dodge-area
+            noBtn.style.position = 'absolute';
             noBtn.style.left = randomX + 'px';
-            noBtn.style.bottom = randomY + 'px';
+            noBtn.style.top = randomY + 'px';
+            noBtn.style.transform = 'none'; // Clear any default centering transform
 
-            // SAFETY MECHANISM: If she is on mobile and it is too hard to tap the moving button, 
-            // after 8 attempts, it will just completely disappear, leaving only the "Yes" button visible.
-            moveCount++;
-            if(moveCount >= 8) {
-                noBtn.style.display = 'none';
+            // Safety mechanism for mobile (after 8 taps/hovers, it disappears)
+            if(btnId === 'noBtn6') {
+                dodgeCount6++;
+                if(dodgeCount6 >= 8) noBtn.style.display = 'none';
+            } else if (btnId === 'noBtn7') {
+                dodgeCount7++;
+                if(dodgeCount7 >= 8) noBtn.style.display = 'none';
             }
         }
     </script>
