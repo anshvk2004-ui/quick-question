@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>A Questionnaire 🐾</title>
     <style>
         body { 
@@ -17,60 +17,60 @@
             justify-content: center; 
             overflow: hidden; 
             color: #d81b60;
+            touch-action: manipulation; /* Prevents zooming on double tap */
         }
 
-        /* MADE EVERYTHING BIGGER */
+        /* EXPANDED FRAME FOR MOBILE */
         .step-container { 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
-            width: 90%;
-            max-width: 480px; /* Increased frame size */
-            padding: 35px; /* Added more breathing room inside the box */
+            width: 95%; /* Fills almost the whole phone screen */
+            max-width: 500px; 
+            padding: 40px 20px; 
             background: rgba(255, 255, 255, 0.85);
             border-radius: 25px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-sizing: border-box;
         }
 
         .hidden { display: none !important; }
 
-        /* INCREASED IMAGE SIZE */
+        /* BIG IMAGES */
         img { 
-            width: 300px; 
-            height: 300px;
+            width: 100%; /* Scales image to fit container */
+            max-width: 320px;
+            height: auto;
+            aspect-ratio: 1 / 1; /* Keeps them perfectly square */
             object-fit: cover;
             border-radius: 20px; 
             margin-bottom: 25px; 
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* INCREASED FONT SIZES */
+        /* BIGGER FONT SIZES */
         h1 { 
             color: #d81b60; 
-            font-size: 24px; 
-            margin-bottom: 20px; 
+            font-size: 26px; 
+            margin-bottom: 25px; 
             padding: 0 10px; 
             line-height: 1.4;
-        }
-        
-        p {
-            font-size: 20px;
-            font-weight: bold;
         }
 
         /* Standard choice buttons */
         .grid-choices {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            display: flex; /* Changed from grid to flex for better centering when odd number of buttons */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
             width: 100%;
         }
 
         /* BIGGER BUTTONS */
         .btn { 
             font-size: 18px; 
-            padding: 15px 20px; 
+            padding: 16px 24px; 
             border: none; 
             border-radius: 25px; 
             cursor: pointer; 
@@ -79,7 +79,8 @@
             color: white; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.2s;
-            width: 100%;
+            flex: 1 1 40%; /* Allows buttons to share space evenly */
+            max-width: 200px;
         }
 
         .btn:active { transform: scale(0.95); }
@@ -87,36 +88,40 @@
 
         /* Step 1 proceed button */
         #step1 .btn {
-            font-size: 20px;
-            padding: 18px 40px;
+            font-size: 22px;
+            padding: 18px 45px;
+            flex: none;
             width: auto;
         }
 
-        /* FIXED DODGE AREA LOGIC (No overlapping) */
+        /* DODGE AREA LOGIC */
         .dodge-area {
             position: relative;
             width: 100%;
-            height: 120px; /* Lots of space for the button to run around */
-            margin-top: 10px;
+            height: 140px; /* Lots of space for the button to run around */
+            margin-top: 15px;
             display: flex;
             justify-content: center;
-            align-items: center; /* Centers them perfectly */
-            gap: 30px; /* Keeps Yes and No cleanly separated */
+            align-items: center; 
+            gap: 30px; 
         }
 
-        /* Initial positions are relative so they sit side-by-side */
         #yesBtn6, #yesBtn7 {
             position: relative; 
             z-index: 10;
-            width: 120px;
+            width: 130px;
+            font-size: 20px;
+            flex: none;
         }
 
         #noBtn6, #noBtn7 { 
-            position: relative; /* Will turn to absolute ONLY when touched */
+            position: relative; 
             background-color: #cccccc; 
             color: white;
             z-index: 10;
-            width: 100px;
+            width: 110px;
+            font-size: 20px;
+            flex: none;
         }
 
     </style>
@@ -147,7 +152,6 @@
             <button class="btn" onclick="nextStep(4)">Lilies 🤍</button>
             <button class="btn" onclick="nextStep(4)">Sunflower 🌻</button>
             <button class="btn" onclick="nextStep(4)">Roses 🌹</button>
-            <button class="btn" onclick="nextStep(4)">Surprise Me ✨</button>
         </div>
     </div>
 
@@ -182,7 +186,7 @@
 
     <div id="step7" class="step-container hidden">
         <img src="cute_eye.png" alt="Cute Eye">
-        <h1>Let’s get serious... Are we getting momos soon? 🥟</h1>
+        <h1>Will you eat momos with me? 🥟</h1>
         <div class="dodge-area" id="dodgeArea7">
             <button class="btn" id="yesBtn7" onclick="nextStep(8)">Yes 💖</button>
             <button class="btn" id="noBtn7" onmouseover="dodgeBtn('noBtn7')" ontouchstart="dodgeBtn('noBtn7')" onclick="dodgeBtn('noBtn7')">No 😿</button>
@@ -191,29 +195,23 @@
 
     <div id="step8" class="step-container hidden">
         <img src="heartcat.jpeg" alt="Heart Cat">
-        <h1>Yesss! I knew it! 😏 Get your raincoat ready. 🛵💨</h1>
-        <p>Take a screenshot and send it to me! 📸</p>
+        <h1>Yesss! I knew it! 😏<br><br>Get ready... 🛵💨</h1>
     </div>
 
     <script>
-        // Move between the different screens
         function nextStep(step) {
             const containers = document.querySelectorAll('.step-container');
             containers.forEach(container => container.classList.add('hidden'));
             document.getElementById('step' + step).classList.remove('hidden');
         }
 
-        // Track dodge attempts (mobile safety mechanism)
         let dodgeCount6 = 0;
         let dodgeCount7 = 0;
 
-        // Logic to make the 'No' button run away strictly inside screen bounds
         function dodgeBtn(btnId) {
             const noBtn = document.getElementById(btnId);
             const dodgeArea = noBtn.parentElement;
             
-            // Switch to absolute positioning ONLY after the first hover/tap
-            // This prevents the overlapping issue on page load
             noBtn.style.position = 'absolute';
 
             const maxWidth = dodgeArea.clientWidth - noBtn.offsetWidth - 20;
@@ -224,9 +222,8 @@
 
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
-            noBtn.style.margin = '0'; // Clear any flexbox margins
+            noBtn.style.margin = '0'; 
 
-            // Safety mechanism for mobile (after 8 taps/hovers, it disappears)
             if(btnId === 'noBtn6') {
                 dodgeCount6++;
                 if(dodgeCount6 >= 8) noBtn.style.display = 'none';
