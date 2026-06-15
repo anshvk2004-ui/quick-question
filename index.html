@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Quick Question 🐾</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            text-align: center; 
+            background-color: #ffe6f2; /* Soft pastel pink */
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            overflow: hidden; 
+        }
+        img { 
+            width: 280px; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #ff66a3; 
+            font-size: 22px; 
+            margin-bottom: 20px; 
+            padding: 0 20px; 
+        }
+        p { 
+            color: #ff66a3; 
+            font-size: 18px; 
+            font-weight: bold; 
+        }
+        .btn { 
+            font-size: 18px; 
+            padding: 12px 25px; 
+            margin: 10px; 
+            border: none; 
+            border-radius: 25px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            background-color: #ff99c2; 
+            color: white; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.1s, background-color 0.2s; 
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        .btn:hover { 
+            background-color: #ff66a3; 
+        }
+        #noBtn { 
+            position: relative; 
+            background-color: #cccccc; 
+            color: white;
+        }
+        .flower-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 10px; 
+        }
+        .hidden { 
+            display: none !important; 
+        }
+        .step-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Step 1: Intro -->
+    <div id="step1" class="step-container">
+        <img src="https://media.tenor.com/JBGhz8W8_L0AAAAi/cat-cute.gif" alt="Cute Cat">
+        <h1>I have a few very important questions for you, Angshu 🐾</h1>
+        <button class="btn" onclick="nextStep(2)">Proceed ✨</button>
+    </div>
+
+    <!-- Step 2: The Flower Question -->
+    <div id="step2" class="step-container hidden">
+        <img src="https://media.tenor.com/2sGEBvO2R0wAAAAi/cat-flower.gif" alt="Cat with flowers">
+        <h1>If you had to choose, Angshu, which flower is your absolute favorite? 🌸</h1>
+        <div class="flower-grid">
+            <button class="btn" onclick="flowerChosen('Lilies 🤍')">Lilies</button>
+            <button class="btn" onclick="flowerChosen('Daisies 🌼')">Daisies</button>
+            <button class="btn" onclick="flowerChosen('Sunflowers 🌻')">Sunflowers</button>
+            <button class="btn" onclick="flowerChosen('Roses 🌹')">Roses</button>
+        </div>
+        <p id="flowerResponse" class="hidden"></p>
+        <button id="nextTo3" class="btn hidden" style="margin-top: 20px;" onclick="nextStep(3)">Next Question 🐾</button>
+    </div>
+
+    <!-- Step 3: The Bike Ride (Dodging Button) -->
+    <div id="step3" class="step-container hidden">
+        <img src="https://media.tenor.com/T0bU2E7hXgIAAAAi/cat-please.gif" alt="Begging Cat">
+        <h1>Now for the real question... Angshu, are you still down for that bike ride in the rain? 🛵🌧️</h1>
+        <div>
+            <button class="btn" onclick="nextStep(4)">Yes 💖</button>
+            <button class="btn" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()" onclick="moveButton()">No 😿</button>
+        </div>
+    </div>
+
+    <!-- Step 4: Success -->
+    <div id="step4" class="step-container hidden">
+        <img src="https://media.tenor.com/Y-q8qL8Z3mAAAAAi/cat-kiss.gif" alt="Cat Kissing">
+        <h1>I knew it! 😏 Get your raincoat ready, Angshu. 🛵💨</h1>
+        <p>Take a screenshot and send it to me! 📸</p>
+    </div>
+
+    <script>
+        // Move between the different screens
+        function nextStep(step) {
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.add('hidden');
+            document.getElementById('step4').classList.add('hidden');
+            document.getElementById('step' + step).classList.remove('hidden');
+        }
+
+        // Handle the flower choice
+        function flowerChosen(flower) {
+            document.querySelector('.flower-grid').classList.add('hidden');
+            const responseText = document.getElementById('flowerResponse');
+            responseText.innerText = flower + " are beautiful! But I'll probably just get you all of them anyway, Angshu 💐";
+            responseText.classList.remove('hidden');
+            document.getElementById('nextTo3').classList.remove('hidden');
+        }
+
+        // Make the No button run away
+        function moveButton() {
+            const noBtn = document.getElementById('noBtn');
+            
+            // Calculate random positions, keeping the button on screen
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            
+            // Math.max ensures the button doesn't go off the top/left edges
+            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        }
+    </script>
+</body>
+</html>
