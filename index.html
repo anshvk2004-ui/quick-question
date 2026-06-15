@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Quick Question 🐾</title>
+    <title>A Questionnaire for Angshu 🐾</title>
     <style>
         body { 
             font-family: 'Arial', sans-serif; 
@@ -17,27 +17,54 @@
             justify-content: center; 
             overflow: hidden; 
         }
+
+        /* Standard styling for all steps */
+        .step-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .hidden { display: none !important; }
+
         img { 
-            width: 280px; 
+            width: 250px; 
+            height: auto;
             border-radius: 15px; 
             margin-bottom: 20px; 
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
+
         h1 { 
             color: #ff66a3; 
-            font-size: 22px; 
+            font-size: 20px; 
             margin-bottom: 20px; 
-            padding: 0 20px; 
+            padding: 0 10px; 
+            line-height: 1.4;
         }
-        p { 
-            color: #ff66a3; 
-            font-size: 18px; 
-            font-weight: bold; 
+
+        p { color: #ff66a3; font-weight: bold; margin-bottom: 20px;}
+
+        /* Multi-choice Buttons */
+        .grid-choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
         }
-        .btn { 
+
+        /* Special single button styling for introductory screens */
+        .btn-proceed {
             font-size: 18px; 
-            padding: 12px 25px; 
-            margin: 10px; 
+            padding: 12px 30px; 
+            margin-top: 10px;
             border: none; 
             border-radius: 25px; 
             cursor: pointer; 
@@ -45,72 +72,148 @@
             background-color: #ff99c2; 
             color: white; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.1s, background-color 0.2s; 
+            transition: all 0.2s;
         }
-        .btn:active {
-            transform: scale(0.95);
-        }
-        .btn:hover { 
-            background-color: #ff66a3; 
-        }
-        #noBtn { 
-            position: relative; 
-            background-color: #cccccc; 
-            color: white;
-        }
-        .flower-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
-        }
-        .hidden { 
-            display: none !important; 
-        }
-        .step-container { 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
+
+        /* standard questionnaire buttons */
+        .btn { 
+            font-size: 16px; 
+            padding: 10px 20px; 
+            border: none; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            background-color: #ff99c2; 
+            color: white; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s;
             width: 100%;
         }
+
+        .btn:active { transform: scale(0.95); }
+        .btn:hover { background-color: #ff66a3; }
+        .btn-proceed:hover { background-color: #ff66a3; }
+
+        /* Step 6 (favorite to text) specific "please please" background GIF overlay */
+        #step6 {
+            position: relative;
+            background-color: rgba(255,255,255,0.7);
+        }
+        /* GIF Overlay for Step 6 */
+        #step6::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 20px;
+            /* Stable Giphy GIF for "please please" background */
+            background-image: url('https://media.giphy.com/media/AAsbLwL3WGA3T0v7YV/giphy.gif'); 
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25; /* Makes it subtle so text/image is readable */
+            z-index: -1;
+        }
+
+        /* Dodging button layout logic (Steps 6 & 7) */
+        .dodge-area {
+            position: relative;
+            width: 100%;
+            height: 80px; /* Space for buttons to exist in */
+            margin-top: 10px;
+        }
+
+        #yesBtn6, #yesBtn7 {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 10px;
+            width: 100px;
+            z-index: 10;
+        }
+
+        #noBtn6, #noBtn7 { 
+            position: absolute; 
+            background-color: #cccccc; 
+            color: white;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            z-index: 10;
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- Step 1: Intro -->
     <div id="step1" class="step-container">
-        <img src="https://media.tenor.com/JBGhz8W8_L0AAAAi/cat-cute.gif" alt="Cute Cat">
-        <h1>I have a few very important questions for you, Angshu 🐾</h1>
-        <button class="btn" onclick="nextStep(2)">Proceed ✨</button>
+        <img src="https://media.giphy.com/media/Vp3ftHKvKpASA/giphy.gif" alt="Greeting Cat">
+        <h1>Hey Angshu.... hope you had a good day ✨</h1>
+        <h1>If not, let's bring a smile on your face...</h1>
+        <h1>I got a few questions for you 🐾</h1>
+        <button class="btn-proceed" onclick="nextStep(2)">Proceed ✨</button>
     </div>
 
-    <!-- Step 2: The Flower Question -->
     <div id="step2" class="step-container hidden">
-        <img src="https://media.tenor.com/2sGEBvO2R0wAAAAi/cat-flower.gif" alt="Cat with flowers">
-        <h1>If you had to choose, Angshu, which flower is your absolute favorite? 🌸</h1>
-        <div class="flower-grid">
-            <button class="btn" onclick="flowerChosen('Lilies 🤍')">Lilies</button>
-            <button class="btn" onclick="flowerChosen('Daisies 🌼')">Daisies</button>
-            <button class="btn" onclick="flowerChosen('Sunflowers 🌻')">Sunflowers</button>
-            <button class="btn" onclick="flowerChosen('Roses 🌹')">Roses</button>
+        <img src="https://media.giphy.com/media/xT0BKvK89eC79F2HhC/giphy.gif" alt="Mountains vs Home">
+        <h1>Angshu, what's the better place?</h1>
+        <div class="grid-choices">
+            <button class="btn" onclick="nextStep(3)">Home (Assam) 🏡</button>
+            <button class="btn" onclick="nextStep(3)">Himachal 🏔️</button>
         </div>
-        <p id="flowerResponse" class="hidden"></p>
-        <button id="nextTo3" class="btn hidden" style="margin-top: 20px;" onclick="nextStep(3)">Next Question 🐾</button>
     </div>
 
-    <!-- Step 3: The Bike Ride (Dodging Button) -->
     <div id="step3" class="step-container hidden">
-        <img src="https://media.tenor.com/T0bU2E7hXgIAAAAi/cat-please.gif" alt="Begging Cat">
-        <h1>Now for the real question... Angshu, are you still down for that bike ride in the rain? 🛵🌧️</h1>
-        <div>
-            <button class="btn" onclick="nextStep(4)">Yes 💖</button>
-            <button class="btn" id="noBtn" onmouseover="moveButton()" ontouchstart="moveButton()" onclick="moveButton()">No 😿</button>
+        <img src="images.jpeg" alt="Flower Question">
+        <h1>If you had to choose, Angshu, which flower is your favorite? 🌸</h1>
+        <div class="grid-choices">
+            <button class="btn" onclick="nextStep(4)">Lilies 🤍</button>
+            <button class="btn" onclick="nextStep(4)">Sunflower 🌻</button>
+            <button class="btn" onclick="nextStep(4)">Roses 🌹</button>
+            <button class="btn" onclick="nextStep(4)">Other/Surprise Me ✨</button>
         </div>
     </div>
 
-    <!-- Step 4: Success -->
     <div id="step4" class="step-container hidden">
-        <img src="https://media.tenor.com/Y-q8qL8Z3mAAAAAi/cat-kiss.gif" alt="Cat Kissing">
-        <h1>I knew it! 😏 Get your raincoat ready, Angshu. 🛵💨</h1>
+        <img src="https://media.giphy.com/media/26xBLu1Yn24t28R4k/giphy.gif" alt="Nonchalant or Funny Cat">
+        <h1>Which vibe do you prefer, Angshu?</h1>
+        <div class="grid-choices">
+            <button class="btn" onclick="nextStep(5)">Non-chalant 🕶️</button>
+            <button class="btn" onclick="nextStep(5)">Funny 😂</button>
+        </div>
+    </div>
+
+    <div id="step5" class="step-container hidden">
+        <img src="cat-meme-cat-with-gun.png" alt="Cat with Gun Movie Type">
+        <h1>What's your movie type right now? 🎬</h1>
+        <div class="grid-choices">
+            <button class="btn" onclick="nextStep(6)">Rom Com 💖</button>
+            <button class="btn" onclick="nextStep(6)">Drama 🎭</button>
+            <button class="btn" onclick="nextStep(6)">Action 💥</button> 
+        </div>
+    </div>
+
+    <div id="step6" class="step-container hidden">
+        <img src="image_ba67ab.jpg" alt="Please Cat image_ba67ab.jpg">
+        <h1>Am I one of your favorite people to text right now? 😻</h1>
+        <h1>(plzz be yes 😿)</h1>
+        <div class="dodge-area">
+            <button class="btn" id="yesBtn6" onclick="nextStep(7)">Yes 💖</button>
+            <button class="btn" id="noBtn6" onmouseover="moveBtn('noBtn6')" ontouchstart="moveBtn('noBtn6')" onclick="moveBtn('noBtn6')">No 😿</button>
+        </div>
+    </div>
+
+    <div id="step7" class="step-container hidden">
+        <img src="image_ba6024.png" alt="Cute Crying Cat Eye image_ba6024.png">
+        <h1>Angshu, will you eat momos with me soon? 🥟</h1>
+        <div class="dodge-area">
+            <button class="btn" id="yesBtn7" onclick="nextStep(8)">Yes 💖</button>
+            <button class="btn" id="noBtn7" onmouseover="moveBtn('noBtn7')" ontouchstart="moveBtn('noBtn7')" onclick="moveBtn('noBtn7')">No 😿</button>
+        </div>
+    </div>
+
+    <div id="step8" class="step-container hidden">
+        <img src="image_af7ee1.png" alt="Cat with Rose image_af7ee1.png">
+        <h1>Yesss! I knew it! 😏 Get your raincoat ready, Angshu. 🛵💨</h1>
         <p>Take a screenshot and send it to me! 📸</p>
     </div>
 
@@ -121,33 +224,40 @@
             document.getElementById('step2').classList.add('hidden');
             document.getElementById('step3').classList.add('hidden');
             document.getElementById('step4').classList.add('hidden');
+            document.getElementById('step5').classList.add('hidden');
+            document.getElementById('step6').classList.add('hidden');
+            document.getElementById('step7').classList.add('hidden');
+            document.getElementById('step8').classList.add('hidden');
             document.getElementById('step' + step).classList.remove('hidden');
         }
 
-        // Handle the flower choice
-        function flowerChosen(flower) {
-            document.querySelector('.flower-grid').classList.add('hidden');
-            const responseText = document.getElementById('flowerResponse');
-            responseText.innerText = flower + " are beautiful! But I'll probably just get you all of them anyway, Angshu 💐";
-            responseText.classList.remove('hidden');
-            document.getElementById('nextTo3').classList.remove('hidden');
-        }
+        // Variable to track move attempts for dodging button (safety mechanism for mobile)
+        let moveCount = 0;
 
-        // Make the No button run away
-        function moveButton() {
-            const noBtn = document.getElementById('noBtn');
+        // Logic to make the 'No' button run away
+        function moveBtn(btnId) {
+            const noBtn = document.getElementById(btnId);
+            const parent = noBtn.parentElement; // The dodge-area <div>
             
-            // Calculate random positions, keeping the button on screen
-            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
-            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-            
-            // Math.max ensures the button doesn't go off the top/left edges
-            const randomX = Math.max(10, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(10, Math.floor(Math.random() * maxY));
+            // Get dimensions of the area the button can move inside
+            const maxX = parent.clientWidth - noBtn.offsetWidth;
+            const maxY = parent.clientHeight - noBtn.offsetHeight;
 
-            noBtn.style.position = 'absolute';
+            // Generate new random position restricted to the dodge-area
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            // Change positioning mode from absolute-centered to absolute-manual
+            noBtn.style.transform = 'none';
             noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
+            noBtn.style.bottom = randomY + 'px';
+
+            // SAFETY MECHANISM: If she is on mobile and it is too hard to tap the moving button, 
+            // after 8 attempts, it will just completely disappear, leaving only the "Yes" button visible.
+            moveCount++;
+            if(moveCount >= 8) {
+                noBtn.style.display = 'none';
+            }
         }
     </script>
 </body>
