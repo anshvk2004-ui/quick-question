@@ -20,13 +20,12 @@
             touch-action: manipulation; /* Prevents zooming on double tap */
         }
 
-        /* EXPANDED FRAME FOR MOBILE */
         .step-container { 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
-            width: 95%; /* Fills almost the whole phone screen */
+            width: 95%; 
             max-width: 500px; 
             padding: 40px 20px; 
             background: rgba(255, 255, 255, 0.85);
@@ -37,19 +36,17 @@
 
         .hidden { display: none !important; }
 
-        /* BIG IMAGES */
         img { 
-            width: 100%; /* Scales image to fit container */
+            width: 100%; 
             max-width: 320px;
             height: auto;
-            aspect-ratio: 1 / 1; /* Keeps them perfectly square */
+            aspect-ratio: 1 / 1; 
             object-fit: cover;
             border-radius: 20px; 
             margin-bottom: 25px; 
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
-        /* BIGGER FONT SIZES */
         h1 { 
             color: #d81b60; 
             font-size: 26px; 
@@ -58,16 +55,24 @@
             line-height: 1.4;
         }
 
-        /* Standard choice buttons */
+        .final-text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff66a3;
+            margin-top: -10px;
+            margin-bottom: 25px;
+            padding: 0 15px;
+            line-height: 1.5;
+        }
+
         .grid-choices {
-            display: flex; /* Changed from grid to flex for better centering when odd number of buttons */
+            display: flex; 
             flex-wrap: wrap;
             justify-content: center;
             gap: 15px;
             width: 100%;
         }
 
-        /* BIGGER BUTTONS */
         .btn { 
             font-size: 18px; 
             padding: 16px 24px; 
@@ -79,26 +84,25 @@
             color: white; 
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             transition: all 0.2s;
-            flex: 1 1 40%; /* Allows buttons to share space evenly */
+            flex: 1 1 40%; 
             max-width: 200px;
         }
 
         .btn:active { transform: scale(0.95); }
         .btn:hover { background-color: #d81b60; }
 
-        /* Step 1 proceed button */
-        #step1 .btn {
+        #step1 .btn, #step8 .btn {
             font-size: 22px;
             padding: 18px 45px;
             flex: none;
             width: auto;
+            max-width: none;
         }
 
-        /* DODGE AREA LOGIC */
         .dodge-area {
             position: relative;
             width: 100%;
-            height: 140px; /* Lots of space for the button to run around */
+            height: 140px; 
             margin-top: 15px;
             display: flex;
             justify-content: center;
@@ -140,27 +144,27 @@
         <img src="mountcat.jpeg" alt="Mountain Cat">
         <h1>What's the better place?</h1>
         <div class="grid-choices">
-            <button class="btn" onclick="nextStep(3)">Home (Assam) 🏡</button>
-            <button class="btn" onclick="nextStep(3)">Himachal 🏔️</button>
+            <button class="btn" onclick="recordAnswer('Location', 'Home (Assam) 🏡', 3)">Home (Assam) 🏡</button>
+            <button class="btn" onclick="recordAnswer('Location', 'Himachal 🏔️', 3)">Himachal 🏔️</button>
         </div>
     </div>
 
     <div id="step3" class="step-container hidden">
-        <img src="images.jpeg" alt="Flowers images.jpeg">
+        <img src="images.jpeg" alt="Flowers">
         <h1>Which flower is your favorite? 🌸</h1>
         <div class="grid-choices">
-            <button class="btn" onclick="nextStep(4)">Lilies 🤍</button>
-            <button class="btn" onclick="nextStep(4)">Sunflower 🌻</button>
-            <button class="btn" onclick="nextStep(4)">Roses 🌹</button>
+            <button class="btn" onclick="recordAnswer('Flower', 'Lilies 🤍', 4)">Lilies 🤍</button>
+            <button class="btn" onclick="recordAnswer('Flower', 'Sunflower 🌻', 4)">Sunflower 🌻</button>
+            <button class="btn" onclick="recordAnswer('Flower', 'Roses 🌹', 4)">Roses 🌹</button>
         </div>
     </div>
 
     <div id="step4" class="step-container hidden">
-        <img src="nonchalant.jpeg" alt="Vibe nonchalant.jpeg">
+        <img src="nonchalant.jpeg" alt="Vibe">
         <h1>Which vibe do you prefer?</h1>
         <div class="grid-choices">
-            <button class="btn" onclick="nextStep(5)">Non-chalant 🕶️</button>
-            <button class="btn" onclick="nextStep(5)">Funny 😂</button>
+            <button class="btn" onclick="recordAnswer('Vibe', 'Non-chalant 🕶️', 5)">Non-chalant 🕶️</button>
+            <button class="btn" onclick="recordAnswer('Vibe', 'Funny 😂', 5)">Funny 😂</button>
         </div>
     </div>
 
@@ -168,9 +172,9 @@
         <img src="cat_withgun.png" alt="Action Cat">
         <h1>What's your movie type right now? 🎬</h1>
         <div class="grid-choices">
-            <button class="btn" onclick="nextStep(6)">Rom Com 💖</button>
-            <button class="btn" onclick="nextStep(6)">Drama 🎭</button>
-            <button class="btn" onclick="nextStep(6)">Action 💥</button> 
+            <button class="btn" onclick="recordAnswer('Movie', 'Rom Com 💖', 6)">Rom Com 💖</button>
+            <button class="btn" onclick="recordAnswer('Movie', 'Drama 🎭', 6)">Drama 🎭</button>
+            <button class="btn" onclick="recordAnswer('Movie', 'Action 💥', 6)">Action 💥</button> 
         </div>
     </div>
 
@@ -179,7 +183,7 @@
         <h1>Am I one of your favorite people to text right now? 😻</h1>
         <h1>(plzz be yes 😿)</h1>
         <div class="dodge-area" id="dodgeArea6">
-            <button class="btn" id="yesBtn6" onclick="nextStep(7)">Yes 💖</button>
+            <button class="btn" id="yesBtn6" onclick="recordAnswer('Favorite Person', 'YES! 💖', 7)">Yes 💖</button>
             <button class="btn" id="noBtn6" onmouseover="dodgeBtn('noBtn6')" ontouchstart="dodgeBtn('noBtn6')" onclick="dodgeBtn('noBtn6')">No 😿</button>
         </div>
     </div>
@@ -188,23 +192,55 @@
         <img src="cute_eye.png" alt="Cute Eye">
         <h1>Will you eat momos with me? 🥟</h1>
         <div class="dodge-area" id="dodgeArea7">
-            <button class="btn" id="yesBtn7" onclick="nextStep(8)">Yes 💖</button>
+            <button class="btn" id="yesBtn7" onclick="recordAnswer('Momos', 'YES! 💖', 8)">Yes 💖</button>
             <button class="btn" id="noBtn7" onmouseover="dodgeBtn('noBtn7')" ontouchstart="dodgeBtn('noBtn7')" onclick="dodgeBtn('noBtn7')">No 😿</button>
         </div>
     </div>
 
     <div id="step8" class="step-container hidden">
         <img src="heartcat.jpeg" alt="Heart Cat">
-        <h1>Yesss! I knew it! 😏<br><br>Get ready... 🛵💨</h1>
+        <h1>Yesss! I knew it! 😏</h1>
+        <div class="final-text">I hope this brought a smile to your face... because you look the prettiest when you smile. ✨</div>
+        <button class="btn" id="copyBtn" onclick="copyAnswers()">Copy my answers 📋</button>
     </div>
 
     <script>
+        // Object to store her answers
+        let userAnswers = {};
+
+        function recordAnswer(question, answer, stepNum) {
+            userAnswers[question] = answer;
+            nextStep(stepNum);
+        }
+
         function nextStep(step) {
             const containers = document.querySelectorAll('.step-container');
             containers.forEach(container => container.classList.add('hidden'));
             document.getElementById('step' + step).classList.remove('hidden');
         }
 
+        // Copies the text to her phone's clipboard
+        function copyAnswers() {
+            let message = "Hey! Here are my answers to your cute questionnaire:\n\n";
+            if(userAnswers['Location']) message += "📍 *Place:* " + userAnswers['Location'] + "\n";
+            if(userAnswers['Flower']) message += "🌸 *Flower:* " + userAnswers['Flower'] + "\n";
+            if(userAnswers['Vibe']) message += "🕶️ *Vibe:* " + userAnswers['Vibe'] + "\n";
+            if(userAnswers['Movie']) message += "🎬 *Movie:* " + userAnswers['Movie'] + "\n";
+            message += "😻 *Favorite Person:* " + userAnswers['Favorite Person'] + "\n";
+            message += "🥟 *Momos:* " + userAnswers['Momos'] + "\n";
+            
+            navigator.clipboard.writeText(message).then(function() {
+                // Change the button to show it worked!
+                const btn = document.getElementById('copyBtn');
+                btn.innerText = "Copied! Paste it on Insta 💌";
+                btn.style.backgroundColor = "#4CAF50"; // Turns green
+            }).catch(function(err) {
+                // Fallback just in case her browser blocks clipboard
+                alert("Oops! Couldn't copy automatically. Just take a screenshot and send it to me! 📸");
+            });
+        }
+
+        // Dodging button logic
         let dodgeCount6 = 0;
         let dodgeCount7 = 0;
 
