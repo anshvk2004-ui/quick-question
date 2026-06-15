@@ -27,7 +27,7 @@
             justify-content: center;
             width: 95%; 
             max-width: 500px; 
-            padding: 40px 20px; 
+            padding: 30px 20px; /* Slightly reduced top/bottom padding to fit phone screens perfectly */
             background: rgba(255, 255, 255, 0.85);
             border-radius: 25px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.15);
@@ -38,30 +38,30 @@
 
         img { 
             width: 100%; 
-            max-width: 320px;
+            max-width: 280px; /* Scaled down just slightly to ensure it fits small phones */
             height: auto;
             aspect-ratio: 1 / 1; 
             object-fit: cover;
             border-radius: 20px; 
-            margin-bottom: 25px; 
+            margin-bottom: 20px; 
             box-shadow: 0 6px 12px rgba(0,0,0,0.15);
         }
 
         h1 { 
             color: #d81b60; 
-            font-size: 26px; 
-            margin-bottom: 25px; 
+            font-size: 24px; 
+            margin-bottom: 20px; 
             padding: 0 10px; 
             line-height: 1.4;
         }
 
         .final-text {
-            font-size: 20px;
+            font-size: 18px;
             font-weight: bold;
             color: #ff66a3;
-            margin-top: -10px;
-            margin-bottom: 25px;
-            padding: 0 15px;
+            margin-top: -5px;
+            margin-bottom: 20px;
+            padding: 0 10px;
             line-height: 1.5;
         }
 
@@ -75,7 +75,7 @@
 
         .btn { 
             font-size: 18px; 
-            padding: 16px 24px; 
+            padding: 16px 20px; 
             border: none; 
             border-radius: 25px; 
             cursor: pointer; 
@@ -91,19 +91,20 @@
         .btn:active { transform: scale(0.95); }
         .btn:hover { background-color: #d81b60; }
 
+        /* Fixed the single buttons on the first and last page so they aren't too wide */
         #step1 .btn, #step8 .btn {
-            font-size: 22px;
-            padding: 18px 45px;
+            font-size: 20px;
+            padding: 16px 30px;
             flex: none;
-            width: auto;
-            max-width: none;
+            width: 100%;
+            max-width: 260px;
         }
 
         .dodge-area {
             position: relative;
             width: 100%;
-            height: 140px; 
-            margin-top: 15px;
+            height: 120px; 
+            margin-top: 10px;
             display: flex;
             justify-content: center;
             align-items: center; 
@@ -113,7 +114,7 @@
         #yesBtn6, #yesBtn7 {
             position: relative; 
             z-index: 10;
-            width: 130px;
+            width: 120px;
             font-size: 20px;
             flex: none;
         }
@@ -123,7 +124,7 @@
             background-color: #cccccc; 
             color: white;
             z-index: 10;
-            width: 110px;
+            width: 100px;
             font-size: 20px;
             flex: none;
         }
@@ -134,9 +135,8 @@
 
     <div id="step1" class="step-container">
         <img src="catwithrose.png" alt="Rose Cat">
-        <h1>Hey Angshu.... hope you had a good day ✨</h1>
-        <h1>If not, let's bring a smile on your face...</h1>
-        <h1>I got a few questions for you 🐾</h1>
+        <h1>Hey Angshu... ✨</h1>
+        <div class="final-text">Hope you had a good day. If not, let's bring a smile to your face...<br><br>I got a few questions for you 🐾</div>
         <button class="btn" onclick="nextStep(2)">Proceed ✨</button>
     </div>
 
@@ -205,7 +205,6 @@
     </div>
 
     <script>
-        // Object to store her answers
         let userAnswers = {};
 
         function recordAnswer(question, answer, stepNum) {
@@ -219,7 +218,6 @@
             document.getElementById('step' + step).classList.remove('hidden');
         }
 
-        // Copies the text to her phone's clipboard
         function copyAnswers() {
             let message = "Hey! Here are my answers to your cute questionnaire:\n\n";
             if(userAnswers['Location']) message += "📍 *Place:* " + userAnswers['Location'] + "\n";
@@ -230,17 +228,14 @@
             message += "🥟 *Momos:* " + userAnswers['Momos'] + "\n";
             
             navigator.clipboard.writeText(message).then(function() {
-                // Change the button to show it worked!
                 const btn = document.getElementById('copyBtn');
                 btn.innerText = "Copied! Paste it on Insta 💌";
-                btn.style.backgroundColor = "#4CAF50"; // Turns green
+                btn.style.backgroundColor = "#4CAF50"; 
             }).catch(function(err) {
-                // Fallback just in case her browser blocks clipboard
                 alert("Oops! Couldn't copy automatically. Just take a screenshot and send it to me! 📸");
             });
         }
 
-        // Dodging button logic
         let dodgeCount6 = 0;
         let dodgeCount7 = 0;
 
